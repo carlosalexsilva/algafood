@@ -1,5 +1,7 @@
 package com.algaworks.algafood.di.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,8 +13,8 @@ public class AtivacaoClienteService {
 
 	//Podemos indicar o @Autowired aqui também para indicar que esse atributo será instanciado juntamente com essa classe.
 	//Mas ai não é possivel indicar outro tipo de notificador, se no caso tivermos mais que um tipo de notificação.
-	@Autowired(required = false)
-	private Notificador notificador;
+	@Autowired
+	private List<Notificador> notificadores;
 	/*
 	 * PODEMOS USAR O AUTOWIRED AQUI PARA INDICAR QUE ESSE CONSTRUTOR IRÁ INSTANCIAR O NOTIFICADOR TAMBÉM
 	@Autowired
@@ -27,12 +29,11 @@ public class AtivacaoClienteService {
 
 	public void ativar(Cliente cliente) {
 		cliente.ativar();
-		if(this.notificador != null) {
-			this.notificador.notificar(cliente, "Seu cadastro no sistema está ativo!");
-		}else {
-			System.out.println("Não existe notificador, mas cliente foi ativado");
+		for(Notificador notificador : notificadores) {
+			notificador.notificar(cliente, "Seu cadastro no sistema está ativo!");	
 		}
 	}
+		
 
 	/*
 	 * podemos indicar também um método para ser o default na instanciação.
