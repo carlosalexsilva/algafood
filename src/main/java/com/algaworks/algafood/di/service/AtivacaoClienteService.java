@@ -14,7 +14,7 @@ public class AtivacaoClienteService {
 	//Podemos indicar o @Autowired aqui também para indicar que esse atributo será instanciado juntamente com essa classe.
 	//Mas ai não é possivel indicar outro tipo de notificador, se no caso tivermos mais que um tipo de notificação.
 	@Autowired
-	private List<Notificador> notificadores;
+	private Notificador notificador;
 	/*
 	 * PODEMOS USAR O AUTOWIRED AQUI PARA INDICAR QUE ESSE CONSTRUTOR IRÁ INSTANCIAR O NOTIFICADOR TAMBÉM
 	@Autowired
@@ -29,9 +29,9 @@ public class AtivacaoClienteService {
 
 	public void ativar(Cliente cliente) {
 		cliente.ativar();
-		for(Notificador notificador : notificadores) {
-			notificador.notificar(cliente, "Seu cadastro no sistema está ativo!");	
-		}
+		
+		notificador.notificar(cliente, "Seu cadastro no sistema está ativo!");	
+		
 	}
 		
 
