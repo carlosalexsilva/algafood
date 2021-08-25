@@ -1,6 +1,9 @@
 package com.algaworks.algafood.di.service;
 
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -19,17 +22,20 @@ public class AtivacaoClienteService {
 	@TipoDoNotificador(NivelUrgencia.URGENTE)
 	@Autowired
 	private Notificador notificador;
-	/*
-	 * PODEMOS USAR O AUTOWIRED AQUI PARA INDICAR QUE ESSE CONSTRUTOR IRÁ INSTANCIAR O NOTIFICADOR TAMBÉM
-	@Autowired
-	public AtivacaoClienteService(Notificador notificador) {
-		this.notificador = notificador;
-		
-		System.out.println("AtivacaoClienteService:" + notificador);
+	
+	
+	//É possível indicar o método que será utilizado nos ciclos de vida do bean sem as anotações @PostConstruct e PreDestroy
+	//Usando: @Bean(initMethod = "init", destroyMethod="destroy"), isso poderia ser usado em uma classe de configuração como em aula anterior
+	
+	@PostConstruct
+	public void init() {
+		System.out.println("INIT");
 	}
-	*/
-
-
+	
+	@PreDestroy
+	public void destroy() {
+		System.out.println("DESTROY");
+	}
 
 	public void ativar(Cliente cliente) {
 		cliente.ativar();
@@ -38,7 +44,6 @@ public class AtivacaoClienteService {
 		
 	}
 		
-
 	/*
 	 * podemos indicar também um método para ser o default na instanciação.
 	@Autowired
