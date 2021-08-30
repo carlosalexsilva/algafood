@@ -27,7 +27,7 @@ public class Cozinha {
 	private Long id;
 	
 	//@JsonIgnore -> nao exibe esse atributo na resposta 
-	@JsonProperty("titulo") // -> altera o nome do atributo somente no retorno do servidor, como se fosse o transformer do laravel
+	//@JsonProperty("titulo") // -> altera o nome do atributo somente no retorno do servidor, como se fosse o transformer do laravel
 	@Column(nullable = false)
 	private String nome;	
 	
