@@ -63,7 +63,7 @@ public class CozinhaController {
 			// para evitarmos que criar varios sets para popular a cozinhaAtual com o que veio no request, usamos o BeanUtils que copia todos os atributos
 			BeanUtils.copyProperties(cozinha, cozinhaAtual, "id"); // terceira coluna são os campos que serão ignoradas as copias 
 			
-			cozinhaRepository.salvar(cozinhaAtual);			
+			cadastroCozinha.salvar(cozinhaAtual);			
 			return ResponseEntity.ok(cozinhaAtual);
 		}
 		return ResponseEntity.notFound().build();
