@@ -1,6 +1,7 @@
 package com.algaworks.algafood.api.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,15 +35,15 @@ public class CozinhaController {
 
 	@GetMapping
 	public List<Cozinha> listar() {
-		return cozinhaRepository.listar();
+		return cozinhaRepository.findAll();
 	}
 	
 	@GetMapping("/{cozinhaId}") 
 	public ResponseEntity<Cozinha> buscar(@PathVariable Long cozinhaId) {
-		Cozinha cozinha = cozinhaRepository.buscar(cozinhaId);
+		Optional<Cozinha> cozinha = cozinhaRepository.findById(cozinhaId); // esse método nunca retorna null, retorna optional e se dentro tem ou não cozinha.
 		
-		if (cozinha != null) {
-			return ResponseEntity.ok(cozinha);
+		if (cozinha.isPresent()) {
+			return ResponseEntity.ok(cozinha.get());
 		}
 		
 		//return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -57,14 +58,14 @@ public class CozinhaController {
 	
 	@PutMapping("/{cozinhaId}")
 	public ResponseEntity<Cozinha> atualizar(@PathVariable Long cozinhaId, @RequestBody Cozinha cozinha) {
-		Cozinha cozinhaAtual = cozinhaRepository.buscar(cozinhaId);
+		Optional<Cozinha> cozinhaAtual = cozinhaRepository.findById(cozinhaId);
 		
-		if (cozinhaAtual != null) {
+		if (cozinhaAtual.isPresent()) {
 			// para evitarmos que criar varios sets para popular a cozinhaAtual com o que veio no request, usamos o BeanUtils que copia todos os atributos
-			BeanUtils.copyProperties(cozinha, cozinhaAtual, "id"); // terceira coluna são os campos que serão ignoradas as copias 
+			BeanUtils.copyProperties(cozinha, cozinhaAtual.get(), "id"); // terceira coluna são os campos que serão ignoradas as copias 
 			
-			cadastroCozinha.salvar(cozinhaAtual);			
-			return ResponseEntity.ok(cozinhaAtual);
+			Cozinha cozinhaSalva = cadastroCozinha.salvar(cozinhaAtual.get());			
+			return ResponseEntity.ok(cozinhaSalva);
 		}
 		return ResponseEntity.notFound().build();
 		
