@@ -1,6 +1,9 @@
 package com.algaworks.algafood.domain.repository;
 
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +17,8 @@ public interface CozinhaRepository extends JpaRepository<Cozinha, Long>{
 	/*
 	 * Métodos LISTAR, BUSCAR, SALVAR, REMOVE SERÃO IMPLEMENTADOS PELO SPRING DATA JPA
 	 */
-	//List<Cozinha> consultarPorNome(String nome);
+	List<Cozinha> findCozinhaByNome(String nome);
+	//Cozinha findCozinhaByNome(String nome); podemos fazer um metodo pra trazer somente um registro
+	Optional<Cozinha> findCozinhaByNomeUnico(String nome); // ou fazer um retorno do tipo Optional.
 	
 }
