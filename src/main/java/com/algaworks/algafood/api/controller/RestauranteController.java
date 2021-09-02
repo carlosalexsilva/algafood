@@ -100,14 +100,22 @@ public class RestauranteController {
 	}
 	
 	@PatchMapping("/{restauranteId}")
-	public ResponseEntity<?> atualizarParcial(@PathVariable Long restauranteId, 
+	public ResponseEntity<?> atualizarParcial(@PathVariable Long restauranteId,
 			@RequestBody Map<String, Object> campos) {
+		Restaurante restauranteAtual = restauranteRepository.buscar(restauranteId);
 		
-		campos.forEach((nomePropriedade, valorPropriedade) -> {
-			System.out.println(nomePropriedade + " - " + valorPropriedade);
+		if (restauranteAtual == null) {
+			return ResponseEntity.notFound().build();
 		}
-		);
-				
-		return ResponseEntity.ok().build();
+		
+		merge(campos, restauranteAtual);
+		
+		return atualizar(restauranteId, restauranteAtual);
+	}
+
+	private void merge(Map<String, Object> camposOrigem, Restaurante restauranteDestino) {
+		camposOrigem.forEach((nomePropriedade, valorPropriedade) -> {
+			System.out.println(nomePropriedade + " = " + valorPropriedade);
+		});
 	}
 }
