@@ -19,7 +19,7 @@ public class ConsultaCidadeMain {
 		
 		CidadeRepository cidadeRepository = applicationContext.getBean(CidadeRepository.class);
 		
-		List<Cidade> todosCidades = cidadeRepository.listar();
+		List<Cidade> todosCidades = cidadeRepository.findAll();
 		
 		for (Cidade cidade : todosCidades) {
 			System.out.printf("%s - %s\n", cidade.getNome(),

@@ -1,6 +1,7 @@
 package com.algaworks.algafood.api.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.algaworks.algafood.domain.exception.EntidadeEmUsoException;
 import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
-import com.algaworks.algafood.domain.model.Cozinha;
 import com.algaworks.algafood.domain.model.Estado;
 import com.algaworks.algafood.domain.repository.EstadoRepository;
 import com.algaworks.algafood.domain.service.CadastroEstadoService;
@@ -35,7 +35,7 @@ public class EstadoController {
 	
 	@GetMapping
 	public List<Estado> listar(){
-		return estadoRepository.listar();
+		return estadoRepository.findAll();
 	}
 	
 	@PostMapping
@@ -47,7 +47,7 @@ public class EstadoController {
 	@PutMapping("/{estadoId}")
 	public ResponseEntity<?> atualizar(@PathVariable Long estadoId, @RequestBody Estado estado){
 		
-		Estado estadoAtual = estadoRepository.buscar(estadoId);
+		Estado estadoAtual = estadoRepository.findById(estadoId).orElse(null);
 		if (estadoAtual != null) {
 			BeanUtils.copyProperties(estado, estadoAtual, "id");
 			
