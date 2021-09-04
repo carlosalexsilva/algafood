@@ -21,4 +21,6 @@ public interface CozinhaRepository extends JpaRepository<Cozinha, Long>{
 	Optional<Cozinha> findByNome(String nome);
 	//Cozinha findCozinhaByNome(String nome); podemos fazer um metodo pra trazer somente um registro
 	
+	boolean existsByNome(String nome);
+	
 }
