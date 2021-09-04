@@ -17,8 +17,8 @@ public interface CozinhaRepository extends JpaRepository<Cozinha, Long>{
 	/*
 	 * Métodos LISTAR, BUSCAR, SALVAR, REMOVE SERÃO IMPLEMENTADOS PELO SPRING DATA JPA
 	 */
-	List<Cozinha> findCozinhaByNome(String nome);
+	List<Cozinha> findTodasByNomeContaining(String nome);
+	Optional<Cozinha> findByNome(String nome);
 	//Cozinha findCozinhaByNome(String nome); podemos fazer um metodo pra trazer somente um registro
-	Optional<Cozinha> findCozinhaByNomeUnico(String nome); // ou fazer um retorno do tipo Optional.
 	
 }
