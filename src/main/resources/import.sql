@@ -2,6 +2,7 @@ insert into cozinha (nome)values('Chinesa');
 insert into cozinha (nome)values('Japonesa');
 insert into restaurante (nome,taxa_frete, cozinha_id)values('Saiko',5, 2);
 insert into restaurante (nome,taxa_frete, cozinha_id)values('JinJin', 7, 1);
+insert into restaurante (nome,taxa_frete, cozinha_id)values('China In Box', 10, 1);
 
 insert into forma_pagamento (descricao)values('Cartão de Crédito');
 insert into forma_pagamento (descricao)values('Cartão de Débito');
@@ -20,3 +21,5 @@ insert into cidade (nome, estado_id)values('Cambé', 1);
 insert into cidade (nome, estado_id)values('Rolândia', 1);
 insert into cidade (nome, estado_id)values('São Paulo', 2);
 insert into cidade (nome, estado_id)values('Guarulhos', 2);
+
+insert into restaurante_forma_pagamento(restaurante_id, forma_pagamento_id)values (1,1), (1,2), (1,3), (1,4), (2,1), (2,2), (3, 1);
