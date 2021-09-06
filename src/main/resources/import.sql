@@ -10,9 +10,10 @@ insert into cidade (nome, estado_id)values('Rolândia', 1);
 insert into cidade (nome, estado_id)values('São Paulo', 2);
 insert into cidade (nome, estado_id)values('Guarulhos', 2);
 
-insert into restaurante (nome,taxa_frete, cozinha_id, endereco_cidade_id, endereco_cep, endereco_logradouro, endereco_numero, endereco_bairro)values('Saiko',5, 2, 1, '38400-999', 'Rua João Pinheiro', '1000', 'Centro');
-insert into restaurante (nome,taxa_frete, cozinha_id)values('JinJin', 7, 1);
-insert into restaurante (nome,taxa_frete, cozinha_id)values('China In Box', 10, 1);
+insert into restaurante (nome,taxa_frete, cozinha_id, endereco_cidade_id, endereco_cep, endereco_logradouro, endereco_numero, endereco_bairro, data_cadastro, data_atualizacao)values('Saiko',5, 2, 1, '38400-999', 'Rua João Pinheiro', '1000', 'Centro', utc_timestamp, utc_timestamp);
+insert into restaurante (nome,taxa_frete, cozinha_id, data_cadastro, data_atualizacao)values('JinJin', 7, 1, utc_timestamp, utc_timestamp);
+insert into restaurante (nome,taxa_frete, cozinha_id, data_cadastro, data_atualizacao)values('China In Box', 10, 1, utc_timestamp, utc_timestamp);
+
 
 insert into forma_pagamento (descricao)values('Cartão de Crédito');
 insert into forma_pagamento (descricao)values('Cartão de Débito');
